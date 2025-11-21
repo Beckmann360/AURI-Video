@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Fullscreen Video</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-family: sans-serif;
+    font-size: 24px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div id="message">Click anywhere to start the video in fullscreen</div>
+
+<script>
+document.body.addEventListener('click', () => {
+  const iframe = document.createElement('iframe');
+  iframe.src = "https://www.youtube-nocookie.com/embed/59eM05axQMA?autoplay=1&controls=1";
+  iframe.allow = "autoplay; fullscreen";
+  iframe.referrerPolicy = "strict-origin-when-cross-origin";
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.border = "none";
+
+  // Remove the message and add iframe
+  const msg = document.getElementById('message');
+  if(msg) msg.remove();
+  document.body.appendChild(iframe);
+
+  if (iframe.requestFullscreen) iframe.requestFullscreen();
+  else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+  else if (iframe.mozRequestFullScreen) iframe.mozRequestFullScreen();
+  else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
+}, { once: true });
+</script>
+
+</body>
+</html>
